@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello{% endblock %}
+
+{% block body %}
+	<div class="example-wrapper">
+	    <h1>Short urls list:</h1>
+	    
+	    <ul>
+            {% for url in urls %}
+                <li><a href="{{ url.getName }}">{{ url.getShortName }}</a></li>
+                {% if url.getIsShared %}
+                	<p>Url is shared
+                {% else %}
+					<form action="{{ path('urls_share', {'id': url.getId}) }}" method="POST">
+						<button type="submit">share</button>
+					</form>
+                {% endif %}
+            {% endfor %}
+	    </ul>
+	</div>
+{% endblock %}
